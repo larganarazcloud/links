@@ -9,11 +9,11 @@
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500&display=swap" rel="stylesheet">
     <style>
         body {
-            background: linear-gradient(to bottom, #ffffff, #8a3ffc); /* Fondo degradado */
-            color: #343a40; /* Color de texto */
+            background: linear-gradient(to bottom, #ffffff, #8a3ffc);
+            color: #343a40;
             text-align: center;
             padding: 50px;
-            font-family: 'Montserrat', sans-serif; /* Fuente más llamativa */
+            font-family: 'Montserrat', sans-serif;
         }
         .link-card {
             margin: 10px 0;
@@ -25,15 +25,15 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); /* Sombra para los botones */
-            background: linear-gradient(45deg, #6a82fb, #fc5c7d); /* Degradado para los botones */
-            color: white; /* Color de texto en los botones */
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            background: linear-gradient(45deg, #7b2cbf, #5c4d8e);
+            color: white;
         }
         .link-card:hover {
             filter: brightness(1.5);
-            transform: scale(1.05); /* Agrandar el botón al pasar el mouse */
-            background: linear-gradient(45deg, #fc5c7d, #6a82fb); /* Efecto degradado al pasar el mouse */
-            color: #fff; /* Asegura que el texto siga legible */
+            transform: scale(1.05);
+            background: linear-gradient(45deg, #8c5cfc, #173ae7);
+            color: #fff;
         }
         .link-facebook { background: linear-gradient(45deg, #3b5998, #8b9dc3); }
         .link-linkedin { background: linear-gradient(45deg, #0077b5, #00a0dc); }
@@ -49,10 +49,10 @@
         }
         footer {
             margin-top: 30px;
-            padding: 10px 0; /* Reducido el padding del footer */
+            padding: 10px 0;
             background-color: #f8f9fa;
             border-top: 1px solid #dee2e6;
-            font-size: 0.9em; /* Tamaño de fuente más pequeño */
+            font-size: 0.9em;
         }
     </style>
 </head>
@@ -80,7 +80,7 @@
             <i class="fab fa-github"></i> GitHub
         </a>
         <a href="https://wa.me/tu_numero" class="btn btn-lg link-card link-whatsapp">
-            <i class="fab fa-whatsapp"></i>WhatsApp
+            <i class="fab fa-whatsapp"></i> WhatsApp
         </a>
         <a href="mailto:leandromatiasarganaraz@gmail.com" class="btn btn-lg link-card" style="background-color: #007bff;">
             <i class="fas fa-envelope"></i> Enviar Email
@@ -100,27 +100,16 @@
         const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
         document.getElementById('date').innerText = today.toLocaleDateString('es-ES', options);
 
-        // Obtener ubicación y temperatura
-        function getLocationAndTemperature() {
-            if (navigator.geolocation) {
-                navigator.geolocation.getCurrentPosition(position => {
-                    const latitude = position.coords.latitude;
-                    const longitude = position.coords.longitude;
-                    getCity(latitude, longitude);
-                }, error => {
-                    document.getElementById('location').innerText = 'No se pudo obtener la ubicación.';
-                });
-            } else {
-                document.getElementById('location').innerText = 'Geolocalización no soportada por este navegador.';
-            }
-        }
+        // Definir ubicación y obtener temperatura para Buenos Aires
+        const latitude = -34.6037; // Latitud de Buenos Aires
+        const longitude = -58.3816; // Longitud de Buenos Aires
 
         function getCity(latitude, longitude) {
             fetch(`https://api.opencagedata.com/geocode/v1/json?q=${latitude},${longitude}&key=bccc0218de8a42debdab5c6bf0f5b250`)
                 .then(response => response.json())
                 .then(data => {
                     const city = data.results[0].components.city || data.results[0].components.town || data.results[0].components.village || "Ciudad no encontrada";
-                    document.getElementById('location').innerText = `Ubicación estimada: ${city}`;
+                    document.getElementById('location').innerText = `Ubicación: ${city}`;
                     fetchTemperature(latitude, longitude);
                 })
                 .catch(error => {
@@ -140,7 +129,8 @@
                 });
         }
 
-        getLocationAndTemperature();
+        // Llamar a la función para obtener la ciudad y la temperatura
+        getCity(latitude, longitude);
     </script>
 </body>
 </html>

@@ -42,10 +42,20 @@
         .link-whatsapp { background: linear-gradient(45deg, #25D366, #128C7E); }
         .link-card i { margin-right: 10px; }
         .header { margin-bottom: 30px; }
+        .name {
+            font-size: 2.5em;
+            margin: 0;
+        }
         .subtitle {
             font-weight: bold;
-            font-size: 1.2em;
+            font-size: 1.5em;
             margin-top: -10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .subtitle i {
+            margin-left: 10px; /* Espacio entre el texto y el ícono */
         }
         footer {
             background: linear-gradient(90deg, #0056A0, #FFD700);
@@ -57,7 +67,7 @@
             width: 100%;
         }
         footer p {
-            margin: 0; 
+            margin: 0;
             font-size: 0.9em;
             color: #ffffff;
         }
@@ -66,8 +76,8 @@
 <body>
 
     <div class="header">
-        <h1>Leandro Matias Argañaraz</h1>
-        <p class="subtitle">Software Developer</p>
+        <h1 class="name">LEANDRO ARGAÑARAZ</h1>
+        <p class="subtitle">Software Developer <i class="fas fa-laptop"></i></p>
         <p id="date"></p>
         <p id="location"></p>
         <p id="temperature"></p>
